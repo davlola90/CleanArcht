@@ -10,5 +10,7 @@ namespace CleanArchitecture.Application.Interfaces
     {
 
         CourseViewModel GetCourses();
+
+        void CreateCourse(CourseViewModel courseViewModel);
     }
 }
