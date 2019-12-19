@@ -1,19 +1,19 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Threading.Tasks;
+
+using CleanArchitecture.Infra.Data.Context;
 using CleanArchitecture.Infra.IoC;
-using CleanArchitecture.Mvc.Data;
 using MediatR;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.AspNetCore.HttpsPolicy;
-using Microsoft.AspNetCore.Mvc;
+
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
-using Microsoft.Extensions.Logging;
+
+using Microsoft.OpenApi.Models;
 
 namespace CleanArchitecture.Api
 {
@@ -29,10 +29,16 @@ namespace CleanArchitecture.Api
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddDbContext<ApplicationDbContext>(options =>
+            services.AddDbContext<UniversityDBContext>(options =>
                options.UseSqlServer(
-                   Configuration.GetConnectionString("UniversityidentityDbConnection")));
+                   Configuration.GetConnectionString("UniversityDbConnection")));
             services.AddControllers();
+         /*  services.AddSwaggerGen();
+            services.AddSwaggerGen(c =>
+            {
+                c.SwaggerDoc("v1", new OpenApiInfo { Title = "University Api", Version = "v1" });
+            });
+            */
 
             services.AddMediatR(typeof(Startup));
 
@@ -48,14 +54,23 @@ namespace CleanArchitecture.Api
             }
 
             app.UseHttpsRedirection();
+           
 
             app.UseRouting();
 
             app.UseAuthorization();
 
+          
+
             app.UseEndpoints(endpoints =>
             {
                 endpoints.MapControllers();
+            });
+
+            app.UseSwagger();
+            app.UseSwaggerUI(c =>
+            {
+                c.SwaggerEndpoint("/swagger/v1/swagger.json", "University Api v1");
             });
         }
         private static void RegisterServices(IServiceCollection services)

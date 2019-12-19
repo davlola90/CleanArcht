@@ -8,6 +8,9 @@ EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Domain", "Domain", "{373502CB-155E-49CB-BD38-35053AFE0AB6}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Infra.IoC", "Infra.IoC", "{1961222E-1E70-429D-B46A-CDADDF03D0B8}"
+	ProjectSection(SolutionItems) = preProject
+		CleanArchitecture.Api\WeatherForecast.cs = CleanArchitecture.Api\WeatherForecast.cs
+	EndProjectSection
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Infra.Data", "Infra.Data", "{E65AA17C-FCA7-4766-B68A-A656BB62342E}"
 EndProject
